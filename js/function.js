@@ -6,6 +6,10 @@
  *
  */
 
+//@prepros-prepend browserDetect.js
+//@prepros-prepend jquery.viewportchecker.js
+//@prepros-prepend slick.min.js
+
 var TempApp = {
     lgWidth: 1200,
     mdWidth: 992,
@@ -47,34 +51,43 @@ $(document).ready(function() {
 	});
 
 	// Scroll to ID // Плавный скролл к элементу при нажатии на ссылку. В ссылке указываем ID элемента
-	// $('#main__menu a[href^="#"]').click( function(){ 
-	// 	var scroll_el = $(this).attr('href'); 
-	// 	if ($(scroll_el).length != 0) {
-	// 	$('html, body').animate({ scrollTop: $(scroll_el).offset().top }, 500);
-	// 	}
-	// 	return false;
-	// });
+	$('[data-scroll]').click( function(){
+		var scroll_el = $(this).attr('href');
+		if ($(scroll_el).length != 0) {
+		$('html, body').animate({ scrollTop: $(scroll_el).offset().top }, 500);
+		}
+		return false;
+	});
 
 	// Stiky menu // Липкое меню. При прокрутке к элементу #header добавляется класс .stiky который и стилизуем
-    // $(document).ready(function(){
-    //     var HeaderTop = $('#header').offset().top;
-        
-    //     $(window).scroll(function(){
-    //             if( $(window).scrollTop() > HeaderTop ) {
-    //                     $('#header').addClass('stiky');
-    //             } else {
-    //                     $('#header').removeClass('stiky');
-    //             }
-    //     });
-    // });
+    var HeaderTop = $('.header__nav').offset().top;
+    var navStuff = '<div class="nav__stuff"></div>';
+
+    $(window).scroll(function(){
+        if( $(window).scrollTop() > HeaderTop ) {
+            $('.header__nav')
+                .appendTo('.wrapper')
+                .addClass('stiky');
+            if (!$('.nav__stuff').length) {
+                $('.header__wrapper').append(navStuff);
+                $('.nav__stuff').height($('.header__nav').height());
+            }
+        } else {
+            $('.nav__stuff').remove();
+            $('.header__nav').removeClass('stiky').insertAfter('.header__soc');
+        }
+    });
 
     // Inputmask.js
     // $('[name=tel]').inputmask("+9(999)999 99 99",{ showMaskOnHover: false });
-    // formSubmit();
-    
-   	gridMatch();
+    formSubmit();
+
+    $('.review__slider').slick({
+        fade: true
+    });
 
     checkOnResize();
+    animateBox();
 
 });
 
@@ -89,15 +102,8 @@ $(window).resize(function(event) {
 });
 
 function checkOnResize() {
-   	gridMatch();
     fontResize();
-}
-
-function gridMatch() {
-   	$('[data-grid-match] .grid__item').matchHeight({
-   		byRow: true,
-   	});
-}
+};
 
 function fontResize() {
     var windowWidth = $(window).width();
@@ -107,6 +113,42 @@ function fontResize() {
     	var fontSize = 60;
     }
 	$('body').css('fontSize', fontSize + '%');
+};
+
+function animateBox() {
+    var item = $('[data-animate]');
+
+    item.addClass('hidden');
+
+    item.each(function(index, el) {
+        var animSide = $(this).attr('data-animate');
+        var offset = 100;
+
+        if ($(this).is('.gallery__item:nth-child(even)')) {
+            offset = 200;
+        }
+
+        switch (animSide) {
+            case 'left':
+                var class = 'fadeInLeft';
+                break;
+            case 'right':
+                var class = 'fadeInRight';
+                break;
+            case 'up':
+                var class = 'fadeInUp';
+                break;
+            case 'down':
+                var class = 'fadeInDown';
+                break;
+            default:
+
+        }
+        $(this).viewportChecker({
+            classToAdd: 'visible animated '+class+'',
+            offset: offset
+        });
+    });
 }
 
 // Видео youtube для страницы
@@ -152,7 +194,7 @@ $(function () {
 //         len = main.length,
 //         output = '',
 //         i = len - 1;
-    
+
 //     while(i >= 0) {
 //         output = main.charAt(i) + output;
 //         if ((len - i) % 3 === 0 && i > 0) {
@@ -184,71 +226,74 @@ $(function () {
 // })
 
 // Простая проверка форм на заполненность и отправка аяксом
-// function formSubmit() {
-//     $("[type=submit]").on('click', function (e){ 
-//         e.preventDefault();
-//         var form = $(this).closest('.form');
-//         var url = form.attr('action');
-//         var form_data = form.serialize();
-//         var field = form.find('[required]');
-//         // console.log(form_data);
+function formSubmit() {
+    $("[type=submit]").on('click', function (e){
+        e.preventDefault();
+        var form = $(this).closest('.form');
+        var url = form.attr('action');
+        var form_data = form.serialize();
+        var field = form.find('[required]');
+        // console.log(form_data);
 
-//         empty = 0;
+        empty = 0;
 
-//         field.each(function() {
-//             if ($(this).val() == "") {
-//                 $(this).addClass('invalid');
-//                 // return false;
-//                 empty++;
-//             } else {
-//                 $(this).removeClass('invalid');
-//                 $(this).addClass('valid');
-//             }  
-//         });
+        field.each(function() {
+            if ($(this).val() == "") {
+                $(this).addClass('invalid');
+                $(this).parent().append('<div class="form__message">Заполните обязательное поле</div>');
+                // return false;
+                empty++;
+            } else {
+                $(this).removeClass('invalid');
+                $(this).addClass('valid');
+            }
+        });
 
-//         // console.log(empty);
+        // console.log(empty);
 
-//         if (empty > 0) {
-//             return false;
-//         } else {        
-//             $.ajax({
-//                 url: url,
-//                 type: "POST",
-//                 dataType: "html",
-//                 data: form_data,
-//                 success: function (response) {
-//                     // $('#success').modal('show');
-//                     // console.log('success');
-//                     console.log(response);
-//                     // console.log(data);
-//                     // document.location.href = "success.html";
-//                 },
-//                 error: function (response) {
-//                     // $('#success').modal('show');
-//                     // console.log('error');
-//                     console.log(response);
-//                 }
-//             });
-//         }
+        if (empty > 0) {
+            return false;
+        } else {
+            $.ajax({
+                url: url,
+                type: "POST",
+                dataType: "html",
+                data: form_data,
+                success: function (response) {
+                    // $('#success').modal('show');
+                    // console.log('success');
+                    $(this).attr('disabled', true);
+                    console.log(response);
+                    $('.form__rezult').html(response);
+                    // $(this).attr('disabled', false);
+                    // console.log(data);
+                    // document.location.href = "success.html";
+                },
+                error: function (response) {
+                    // $('#success').modal('show');
+                    // console.log('error');
+                    console.log(response);
+                }
+            });
+        }
 
-//     });
+    });
 
-//     $('[required]').on('blur', function() {
-//         if ($(this).val() != '') {
-//             $(this).removeClass('invalid');
-//         }
-//     });
+    $('[required]').on('blur', function() {
+        if ($(this).val() != '') {
+            $(this).removeClass('invalid');
+            $(this).parent().find('.form__message').remove();
+        }
+    });
 
-//     $('.form__privacy input').on('change', function(event) {
-//         event.preventDefault();
-//         var btn = $(this).closest('.form').find('.btn');
-//         if ($(this).prop('checked')) {
-//             btn.removeAttr('disabled');
-//             // console.log('checked');
-//         } else {
-//             btn.attr('disabled', true);
-//         }
-//     });
-// }
-
-
+    $('.form__privacy input').on('change', function(event) {
+        event.preventDefault();
+        var btn = $(this).closest('.form').find('.btn');
+        if ($(this).prop('checked')) {
+            btn.removeAttr('disabled');
+            // console.log('checked');
+        } else {
+            btn.attr('disabled', true);
+        }
+    });
+}

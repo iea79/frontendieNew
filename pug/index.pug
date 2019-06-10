@@ -1,0 +1,229 @@
+- var frontV = '0.4'
+<!DOCTYPE html>
+html(lang="en")
+head
+    meta(charset="UTF-8")
+    meta(name="viewport", content="width=device-width, initial-scale=1.0")
+    meta(http-equiv="X-UA-Compatible", content="ie=edge")
+    title Профессиональная верстка сайтов - Евгений Иванов
+    meta(name="description" content="Профессиональная верстка сайтов любой сложности. В профессии с 2010 года.")
+    meta(
+        name="keywords" 
+        content="верстка, верстка сайта, div верстка, блочная верстка, html верстка, верстка css, верстка шаблона, web верстка, вёрстка psd, сверстать sketch, заказать верстку сайта"
+        )
+
+    link(rel="apple-touch-icon" sizes="57x57" href="img/favicon/apple-icon-57x57.png")
+    link(rel="apple-touch-icon" sizes="60x60" href="img/favicon/apple-icon-60x60.png")
+    link(rel="apple-touch-icon" sizes="72x72" href="img/favicon/apple-icon-72x72.png")
+    link(rel="apple-touch-icon" sizes="76x76" href="img/favicon/apple-icon-76x76.png")
+    link(rel="apple-touch-icon" sizes="114x114" href="img/favicon/apple-icon-114x114.png")
+    link(rel="apple-touch-icon" sizes="120x120" href="img/favicon/apple-icon-120x120.png")
+    link(rel="apple-touch-icon" sizes="144x144" href="img/favicon/apple-icon-144x144.png")
+    link(rel="apple-touch-icon" sizes="152x152" href="img/favicon/apple-icon-152x152.png")
+    link(rel="apple-touch-icon" sizes="180x180" href="img/favicon/apple-icon-180x180.png")
+    link(rel="icon" type="image/png" sizes="192x192"  href="img/favicon/android-icon-192x192.png")
+    link(rel="icon" type="image/png" sizes="32x32" href="img/favicon/favicon-32x32.png")
+    link(rel="icon" type="image/png" sizes="96x96" href="img/favicon/favicon-96x96.png")
+    link(rel="icon" type="image/png" sizes="16x16" href="img/favicon/favicon-16x16.png")
+    link(rel="manifest" href="img/favicon/manifest.json")
+    meta(name="msapplication-TileColor" content="#ffffff")
+    meta(name="msapplication-TileImage" content="img/favicon/ms-icon-144x144.png")
+    meta(name="theme-color" content="#ffffff")
+
+    link(rel="stylesheet", href="css/style.css?"+frontV+"")
+body
+    .wrapper
+        header.header#header
+            .container_center
+                .header__wrapper
+                    .header__left
+                        //- a(href="/employer.html").page__toggle Для работодателя
+                        |Frontend разработчик
+                    .header__logo
+                        a(href="/")
+                            //- img(src="img/logo.png", alt="")
+                            |Евгений <br>Иванов
+                    .header__soc
+                        ul.soc
+                            li.soc__item
+                                a.soc__link(href="skype:ivanov_ea?chat")
+                                    i.icon-skype
+                            li.soc__item
+                                a.soc__link(href="https://t.me/busforward" target="blank")
+                                    i.icon-telegram
+                            li.soc__item
+                                a.soc__link(href="https://vk.com/busforward" target="blank")
+                                    i.icon-vk
+                    nav.header__nav
+                        ul.nav
+                            li.nav__item
+                                a.nav__link(href="#header" data-scroll)
+                                    i.icon-home
+                            li.nav__item
+                                a.nav__link(href="#review" data-scroll) Отзывы
+                            li.nav__item
+                                a.nav__link(href="#gallery" data-scroll) Мои работы
+                            li.nav__item
+                                a.nav__link(href="#price" data-scroll) Цены
+                            li.nav__item
+                                a.nav__link(href="#contact" data-scroll) Контакты
+
+        main.main__content
+            .fScreen
+                .fScreen__wrapper
+                    .container_center
+                        h1.fScreen__title(data-animate="left") Профессиональная верстка сайтов
+                            span любой сложности
+                        h2.fScreen__subtitle(data-animate="right") от визитки до корпоративного сайта
+
+            // begin gallery
+            section#gallery.gallery
+                .skew.skew_dark
+                    .skew__wrapper
+                        .container_center
+                            h2.section__title(data-animate="up") Галерея
+                                span Несколько моих работ
+                            h3.section__subtitle(data-animate="up") Наведите на картинку, чтобы посмотреть подробности. 
+                                //- br
+                                //- | 
+                                //- |Для вашего удобства, работы разбиты на категории. 
+
+                            .gallery__list
+                                -var gallery = [{img: 'sushimaster.png', project: 'Суши Мастер - сеть ресторанов доставки блюд японской кухни', link: 'jobs/sushimaster/'}, {img: 'altairVR.jpg', project: 'Altair VR - Виртуальная энциклопедия.', link: 'jobs/altair_vr/'}, {img: 'sparta.jpg', project: 'Sparta - мужское сообщество в России', link: 'jobs/sparta/'}, {img: 'etopiter.jpg', project: 'Театр Эстрады им. Аркадия Райкина - одна из нескольких работ для театра', link: 'jobs/piter-land/'}, {img: 'gralnik.png', project: 'Gralnik sport - лэндинг для баскетбольного турнира', link: 'jobs/gralnik/'}, {img: 'adbk.png', project: 'ADBK - маркетинговое агентство', link: 'jobs/adbk/'} ]
+                                each item, index in gallery
+                                    //- if (index + 1)%2 ? side = 'left' : side = 'right'
+                                    .gallery__item(data-animate='up')
+                                        .gallery__img(style="background-image: url('img/gallery/"+item.img+"')")
+                                        .gallery__descr
+                                            //- p= index+1
+                                            .gallery__name= item.project
+                                            a.btn(data-project= item.project, href= item.link, target="_blank") Перейти на страницу
+
+            // end gallery
+
+            // begin price
+            section#price.price.section_light
+                .container_center
+                    h2.section__title(data-animate="up") Стоимость 
+                        span моей работы
+                    h3.section__subtitle(data-animate="up") *Стоимость указана приблизительная. Для уточнения стоимости именно по вашему проекту просто 
+                        a(href="#contact" data-scroll) напишите мне
+
+                    .price__grid
+                        .price__item(data-animate="left")
+                            .price__title Для заказчиков
+                            .price__subtitle *Если вам не нужно програмирование. Например вам нужен одностраничник на html с настроенными формами для сбора заявок и т.д.
+                            .price__descr
+                                .price__name Верска одностраничного сайта
+                                .price__summ от 5 000 руб
+                            .price__descr
+                                .price__name Верска многостраничного сайта
+                                .price__summ от 8 000 руб
+                        .price__item(data-animate="right")
+                            .price__title Для работодателей
+                            .price__subtitle *Вам или в вашу команду нужен верстальщик удаленно на постоянной основе <br>
+                                a(href="https://www.fl.ru/users/iea791/") Мой профиль на fl.ru
+                            .price__descr
+                                .price__name Стоимость часа работы
+                                .price__summ 1 500 руб
+                            .price__descr
+                                .price__name Стоимость месяца работы
+                                .price__summ 130 000 руб 
+                                    small (20-25 часов в неделю)
+
+                        .price__method
+                            .price__methodTitle(data-animate="up") Варианты оплаты
+                            .price__methodItem(data-animate="up") Банковские карты
+                            .price__methodItem(data-animate="up") Электронные деньги
+                            .price__methodItem(data-animate="up") На счет ИП
+
+
+            // end price
+
+            // begin review
+            section#review.review
+                .skew.skew_dark.skew_reverse
+                    .skew__wrapper
+                        .container_center
+                            h2.section__title.section__title_center(data-animate="up") Отзывы
+                                span о работе со мной
+                            .review__slider(data-animate="up")
+                                .review__item
+                                    .review__text Большое спасибо за проделанную работу и терпение)! Евгений стойко выдержал все многочисленные правки и пожелания заказчика, довел проект до конца, сделал всю работу очень качественно и профессионально. Рекомендую Евгения, как грамотного специалиста и очень адекватного в общении исполнителя, что большая редкость на фрилансе)
+                                    a.review__name(href="https://www.fl.ru/users/anna_khomenko_e") Анна Хоменко
+                                .review__item
+                                    .review__text Отличная верстка, исполнитель всегда был на связи и оперативно вносил правки. Вот чего не хватает большему количеству фрилансеров! <br>Спасибо, надеюсь продолжить сотрудничество
+                                    a.review__name(href="https://www.fl.ru/users/spacestudio") Людмила Шап
+                                .review__item
+                                    .review__text Прекрасный заказ все по делу, Евгений всегда на связи, адекватен, качество понравилось всем, дизайнеру и программистам. Будем сотрудничать еще
+                                    a.review__name(href="https://www.fl.ru/users/totalart") Alexey Korshunov
+
+
+            // end review
+
+            // begin contact
+            section#contact.contact.section_light
+                .container_center
+                    h2.section__title(data-animate="up") Свяжитесь со мной
+                        span Нет причин откладывать
+                    .grid.grid__2
+                        .contact__item(data-animate="left")
+                            .contact__title Напишите мне
+                            .contact__descr
+                                .contact__img
+                                    img(src="img/iea.jpg", alt="")
+                                .contact__contact
+                                    .contact__contactItem
+                                        i.icon-mail
+                                        a(href="mailto:busforward@gmail.com") busforward@gmail.com
+                                    .contact__contactItem
+                                        i.icon-telegram
+                                        a(href="https://t.me/busforward") Написать в Telegram
+                                    .contact__contactItem
+                                        i.icon-skype
+                                        a(href="skype:ivanov_ea?chat") Написать в Skype
+                                    .contact__contactItem
+                                        i.icon-vk
+                                        a(href="https://vk.com/busforward") Профиль Вконтакте
+                                    .contact__contactItem.contact__subtitle
+                                        i.icon-info
+                                        | 
+                                        |Прием новых заявок с 10:00 до 16:00 по московскому времени
+                        .contact__item(data-animate="right")
+                            .contact__title Или заполните форму
+                            form.form(action="send.php")
+                                input(type="hidden", name="subject", value="Заявка с сайта")
+                                .form__row
+                                    input(type="text" placeholder="Ваше имя" name="name" required)
+                                .form__row
+                                    input(type="text" placeholder="Ваш email или телефон" name="email" required)
+                                .form__row
+                                    textarea(placeholder="Ваше сообщение" name="message" required)
+                                .form__action
+                                    button.btn(type="submit") Отправить сообщение
+                                .form__rezult
+
+            // end contact
+
+        .footer
+            .skew.skew_dark
+                .skew__wrapper
+                    .container_center
+                        .footer__wraper
+                            a.footer__logo(href="/") Евгений <br>Иванов
+
+                            .footer__center Профессиональная Верстка Сайтов
+
+                            .footer__copy Evgeniy Ivanov, 2019 ©
+
+    script(src="js/jquery.js")
+    //- script(src="js/browserDetect.js")
+    //- script(src="js/slick.min.js")
+    script(src="js/function-dist.js?"+frontV+"")
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+    script(async src="https://www.googletagmanager.com/gtag/js?id=UA-43113925-4")
+    script.
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'UA-43113925-4');

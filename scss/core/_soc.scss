@@ -1,22 +1,24 @@
 // Social link
+
 .soc {
-	float: left;
-	a {
-		display: inline-block;
-		width: 30px;
-		height: 30px;
-		border-radius: 50%;
-		background-color: #000;
-		text-align: center;
+	margin: 0;
+	padding: 0;
+	list-style: none;
+	display: flex;
+
+	&__item {
+		margin: 5px;
+	}
+
+	&__link {
+		font-size: 30px;
+		color: #fff;
 		text-decoration: none;
-		@include trs(0.3s);
+		display: inline-block;
+
 		&:hover {
-			opacity: .8;
-		}
-		&:before {
-			content: 'soc';
 			color: #fff;
-			text-decoration: none;
+			transform: scale(1.2);
 		}
 	}
 }

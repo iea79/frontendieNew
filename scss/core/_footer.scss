@@ -1,14 +1,49 @@
 /* Footer
  ----------------------------------------------------------------------------- */
 .footer {
-	font-size: $main_font_size;
 	position: relative;
-	height: $footer_height;
-	background: #BFF08E;
-	@extend %clear_all;
+	padding-top: 50px;
+
+	@media (min-width: 768px) {
+		font-size: $main_font_size;
+	}
+	// bottom: -150px;
+	// overflow: hidden;
+	.skew {
+		// margin-bottom: -300px;
+		padding: 50px 0 150px;
+	}
+
+	&__logo {
+		font-size: 32px;
+		font-family: "Great Vibes";
+		color: #ffffff;
+		text-decoration: none;
+		line-height: 0.8;
+		margin-bottom: 10px;
+
+		@media (min-width: 768px) {
+			font-size: 52px;
+		}
+	}
+
+	&__wraper {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		font-weight: 300;
+		color: #888;
+		@media (max-width: 767px) {
+			flex-direction: column;
+
+			> div {
+				margin-bottom: 10px;
+			}
+		}
+	}
+
 	.container_center {
-		padding-top: 10px;
-		padding-bottom: 10px;
+		// padding-top: 10px;
+		// padding-bottom: 10px;
 	}
 }
-
