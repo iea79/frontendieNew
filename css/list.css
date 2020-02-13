@@ -1,0 +1,121 @@
+@charset "UTF-8";
+body {
+  margin: 0;
+  font-family: arial;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  min-height: 100vh; }
+
+* {
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box; }
+
+h1 {
+  font-size: 12px;
+  background-color: #191919;
+  color: #fff;
+  padding: 15px;
+  font-weight: 400;
+  text-shadow: 0 0 1px rgba(255, 255, 255, 0.3);
+  margin: 0;
+  -webkit-box-flex: 0;
+  -webkit-flex: none;
+  -ms-flex: none;
+  flex: none;
+  width: 208px; }
+  h1:before {
+    content: 'Список работ ';
+    font-size: 28px; }
+
+#indexlist {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: center; }
+  #indexlist tr:nth-child(even) {
+    background-color: #eee; }
+  #indexlist th {
+    padding: 13px 10px 10px;
+    font-size: 16px;
+    text-transform: uppercase; }
+    #indexlist th:first-of-type {
+      width: 0;
+      text-align: left; }
+  #indexlist td {
+    padding: 5px; }
+    #indexlist td:first-of-type {
+      width: 0;
+      text-align: left; }
+    #indexlist td:nth-child(2) {
+      text-align: left;
+      width: 70%; }
+    #indexlist td a {
+      color: #191919;
+      text-decoration: none;
+      position: relative;
+      display: inline-block;
+      padding-right: 20px;
+      -webkit-transition: 0.3s;
+      -o-transition: 0.3s;
+      transition: 0.3s; }
+      #indexlist td a:after {
+        content: '\27A4';
+        display: inline-block;
+        position: absolute;
+        right: 0;
+        top: -1px;
+        -webkit-transition: 0.3s;
+        -o-transition: 0.3s;
+        transition: 0.3s;
+        -webkit-transform: translateX(-30px);
+        -ms-transform: translateX(-30px);
+        transform: translateX(-30px);
+        opacity: 0; }
+      #indexlist td a:hover {
+        color: #4c4c4c; }
+        #indexlist td a:hover:after {
+          opacity: 1;
+          -webkit-transform: translateX(0);
+          -ms-transform: translateX(0);
+          transform: translateX(0); }
+      #indexlist td a:visited {
+        opacity: 0.5; }
+
+.indexhead {
+  background-color: #2d2d2d; }
+  .indexhead a {
+    color: #fff;
+    text-decoration: none;
+    display: inline-block; }
+    .indexhead a:after {
+      content: '';
+      display: block;
+      border-top: 1px solid;
+      margin-left: 50%;
+      width: 0;
+      -webkit-transition: 0.3s;
+      -o-transition: 0.3s;
+      transition: 0.3s; }
+    .indexhead a:hover:after {
+      content: '';
+      margin-left: 0;
+      width: 100%; }
+
+address {
+  font-size: 0;
+  height: 40px;
+  background-color: #191919;
+  text-align: center;
+  color: #fff;
+  padding: 10px;
+  font-style: normal;
+  display: none; }
+  address:before {
+    content: 'FrontendIE - Ivanov Evgeny';
+    font-size: 14px; }
+
+.indexbreakrow {
+  display: none; }
+
+/*# sourceMappingURL=list.css.map */

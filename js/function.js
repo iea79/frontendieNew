@@ -116,13 +116,14 @@ function fontResize() {
 };
 
 function animateBox() {
-    var item = $('[data-animate]');
+    let item = $('[data-animate]');
 
     item.addClass('hidden');
 
     item.each(function(index, el) {
-        var animSide = $(this).attr('data-animate');
-        var offset = 100;
+        let animSide = $(this).attr('data-animate');
+        let offset = 100;
+        let animClass;
 
         if ($(this).is('.gallery__item:nth-child(even)')) {
             offset = 200;
@@ -130,22 +131,22 @@ function animateBox() {
 
         switch (animSide) {
             case 'left':
-                var class = 'fadeInLeft';
+                animClass = 'fadeInLeft';
                 break;
             case 'right':
-                var class = 'fadeInRight';
+                animClass = 'fadeInRight';
                 break;
             case 'up':
-                var class = 'fadeInUp';
+                animClass = 'fadeInUp';
                 break;
             case 'down':
-                var class = 'fadeInDown';
+                animClass = 'fadeInDown';
                 break;
             default:
 
         }
         $(this).viewportChecker({
-            classToAdd: 'visible animated '+class+'',
+            classToAdd: 'visible animated '+animClass+'',
             offset: offset
         });
     });
@@ -229,6 +230,7 @@ $(function () {
 function formSubmit() {
     $("[type=submit]").on('click', function (e){
         e.preventDefault();
+        $('#check').val('antispam');
         var form = $(this).closest('.form');
         var url = form.attr('action');
         var form_data = form.serialize();
