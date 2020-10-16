@@ -14,6 +14,7 @@
     src: url("../fonts/GoodVibesPro.eot?#iefix") format('embedded-opentype'), url("../fonts/GoodVibesPro.woff2") format('woff2'), url("../fonts/GoodVibesPro.woff") format('woff'), url("../fonts/GoodVibesPro.ttf") format('truetype');
     font-weight: normal;
     font-style: normal;
+    font-display: swap;
 }
 
 @font-face {
@@ -22,6 +23,7 @@
     src: local('Roboto Medium'), local('Roboto-Medium'), url("../fonts/Roboto-Medium.eot?#iefix") format('embedded-opentype'), url("../fonts/Roboto-Medium.woff2") format('woff2'), url("../fonts/Roboto-Medium.woff") format('woff'), url("../fonts/Roboto-Medium.ttf") format('truetype');
     font-weight: 500;
     font-style: normal;
+    font-display: swap;
 }
 
 @font-face {
@@ -30,6 +32,7 @@
     src: local('Roboto'), local('Roboto-Regular'), url("../fonts/Roboto-Regular.eot?#iefix") format('embedded-opentype'), url("../fonts/Roboto-Regular.woff2") format('woff2'), url("../fonts/Roboto-Regular.woff") format('woff'), url("../fonts/Roboto-Regular.ttf") format('truetype');
     font-weight: normal;
     font-style: normal;
+    font-display: swap;
 }
 
 @font-face {
@@ -38,6 +41,7 @@
     src: local('Roboto Black'), local('Roboto-Black'), url("../fonts/Roboto-Black.eot?#iefix") format('embedded-opentype'), url("../fonts/Roboto-Black.woff2") format('woff2'), url("../fonts/Roboto-Black.woff") format('woff'), url("../fonts/Roboto-Black.ttf") format('truetype');
     font-weight: 900;
     font-style: normal;
+    font-display: swap;
 }
 
 @font-face {
@@ -46,6 +50,7 @@
     src: local('Roboto Light'), local('Roboto-Light'), url("../fonts/Roboto-Light.eot?#iefix") format('embedded-opentype'), url("../fonts/Roboto-Light.woff2") format('woff2'), url("../fonts/Roboto-Light.woff") format('woff'), url("../fonts/Roboto-Light.ttf") format('truetype');
     font-weight: 300;
     font-style: normal;
+    font-display: swap;
 }
 
 @font-face {
@@ -54,6 +59,7 @@
     src: local('Roboto Bold'), local('Roboto-Bold'), url("../fonts/Roboto-Bold.eot?#iefix") format('embedded-opentype'), url("../fonts/Roboto-Bold.woff2") format('woff2'), url("../fonts/Roboto-Bold.woff") format('woff'), url("../fonts/Roboto-Bold.ttf") format('truetype');
     font-weight: bold;
     font-style: normal;
+    font-display: swap;
 }
 
 @font-face {
@@ -62,6 +68,7 @@
     src: local('Roboto Thin'), local('Roboto-Thin'), url("../fonts/Roboto-Thin.eot?#iefix") format('embedded-opentype'), url("../fonts/Roboto-Thin.woff2") format('woff2'), url("../fonts/Roboto-Thin.woff") format('woff'), url("../fonts/Roboto-Thin.ttf") format('truetype');
     font-weight: 100;
     font-style: normal;
+    font-display: swap;
 }
 
 // @include font-face("ArialMT", fonts/CenturyGothic, normal, normal);
@@ -101,12 +108,11 @@ body {
     text-decoration: none;
 }
 
-.fScreen {
+.home {
     // transform: skewX(5deg);
     // background-image: url("../img/first-screen.jpg");
     // background-image: url("../img/Software_coding2.jpg");
-    background-image: url("../img/database.jpg");
-    background-repeat: no-repeat;
+    background: url("../img/database-mob.jpg") 0 0 no-repeat;
     background-size: cover;
     // background-attachment: fixed;
     margin-top: -80px;
@@ -122,6 +128,8 @@ body {
     z-index: 5;
 
     @media (min-width: 992px) {
+        background: url("../img/database.jpg") 0 0 no-repeat;
+        background-size: cover;
         min-height: 75vh;
         padding: 180px 0;
     }
@@ -139,14 +147,15 @@ body {
     &__wrapper {
         transform: skewY(4deg);
         position: relative;
+        min-width: 0;
     }
 
     &__title {
-        font-size: 30px;
+        font-size: 28px;
         font-weight: 500;
         line-height: 1.5;
         text-transform: uppercase;
-        margin-bottom: 60px;
+        margin-bottom: 20px;
 
         span {
             display: block;
@@ -156,6 +165,7 @@ body {
         @media (min-width: 768px) {
             font-size: 38px;
             opacity: 0;
+            margin-bottom: 60px;
         }
 
         @media (min-width: 992px) {
@@ -167,6 +177,7 @@ body {
     &__subtitle {
         font-size: 14px;
         font-weight: 300;
+        line-height: 1.7;
         text-transform: uppercase;
 
         @media (min-width: 768px) {
@@ -178,6 +189,14 @@ body {
         @media (min-width: 992px) {
             font-size: 22px;
         }
+    }
+
+    &__slider {
+        width: 100%;
+    }
+
+    &__item {
+        outline: 0;
     }
 
 }

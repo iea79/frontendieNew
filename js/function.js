@@ -6,7 +6,7 @@
  *
  */
 
-//@prepros-prepend browserDetect.js
+//@prepros-prepend jquery.js
 //@prepros-prepend jquery.viewportchecker.js
 //@prepros-prepend slick.min.js
 
@@ -34,6 +34,7 @@ $(document).ready(function() {
         $(function(){$(document).on('touchend', 'a', $.noop)});
     }
 
+    // document.addEventListener('touchstart', {passive: true});
 
 	// First screen full height
 	function setHeiHeight() {
@@ -63,21 +64,6 @@ $(document).ready(function() {
     var HeaderTop = $('.header__nav').offset().top;
     var navStuff = '<div class="nav__stuff"></div>';
 
-    $(window).scroll(function(){
-        if( $(window).scrollTop() > HeaderTop ) {
-            $('.header__nav')
-                .appendTo('.wrapper')
-                .addClass('stiky');
-            if (!$('.nav__stuff').length) {
-                $('.header__wrapper').append(navStuff);
-                $('.nav__stuff').height($('.header__nav').height());
-            }
-        } else {
-            $('.nav__stuff').remove();
-            $('.header__nav').removeClass('stiky').insertAfter('.header__soc');
-        }
-    });
-
     // Inputmask.js
     // $('[name=tel]').inputmask("+9(999)999 99 99",{ showMaskOnHover: false });
     formSubmit();
@@ -86,8 +72,38 @@ $(document).ready(function() {
         fade: true
     });
 
-    checkOnResize();
-    animateBox();
+    $('.home__slider').slick({
+        fade: true,
+        arrows: false,
+        autoplay: true
+    });
+
+    if (!isXsWidth()) {
+        $(window).scroll(function(){
+            if( $(window).scrollTop() > HeaderTop ) {
+                $('.header__nav')
+                .appendTo('.wrapper')
+                .addClass('stiky');
+                if (!$('.nav__stuff').length) {
+                    $('.header__wrapper').append(navStuff);
+                    $('.nav__stuff').height($('.header__nav').height());
+                }
+            } else {
+                $('.nav__stuff').remove();
+                $('.header__nav').removeClass('stiky').insertAfter('.header__soc');
+            }
+        });
+
+        animateBox();
+    }
+
+    // checkOnResize();
+
+    // console.log('json');
+    // $.getJSON('jobs/pages.php', function(json, textStatus) {
+    //     console.log(textStatus);
+    //     console.log(json);
+    // });
 
 });
 
@@ -97,23 +113,23 @@ $(window).resize(function(event) {
     if (TempApp.resized == windowWidth) { return; }
     TempApp.resized = windowWidth;
 
-	checkOnResize();
+	// checkOnResize();
 
 });
 
-function checkOnResize() {
-    fontResize();
-};
-
-function fontResize() {
-    var windowWidth = $(window).width();
-    if (windowWidth >= 1200) {
-    	var fontSize = windowWidth/19.05;
-    } else if (windowWidth < 1200) {
-    	var fontSize = 60;
-    }
-	$('body').css('fontSize', fontSize + '%');
-};
+// function checkOnResize() {
+//     fontResize();
+// };
+//
+// function fontResize() {
+//     var windowWidth = $(window).width();
+//     if (windowWidth >= 1200) {
+//     	var fontSize = windowWidth/19.05;
+//     } else if (windowWidth < 1200) {
+//     	var fontSize = 60;
+//     }
+// 	$('body').css('fontSize', fontSize + '%');
+// };
 
 function animateBox() {
     let item = $('[data-animate]');
@@ -153,38 +169,38 @@ function animateBox() {
 }
 
 // Видео youtube для страницы
-$(function () {
-    if ($(".js_youtube")) {
-        $(".js_youtube").each(function () {
-            // Зная идентификатор видео на YouTube, легко можно найти его миниатюру
-            $(this).css('background-image', 'url(http://i.ytimg.com/vi/' + this.id + '/sddefault.jpg)');
-
-            // Добавляем иконку Play поверх миниатюры, чтобы было похоже на видеоплеер
-            $(this).append($('<img src="img/play.svg" alt="Play" class="video__play">'));
-
-        });
-
-        $('.video__play, .video__prev').on('click', function () {
-            // создаем iframe со включенной опцией autoplay
-            var videoId = $(this).closest('.js_youtube').attr('id');
-            var iframe_url = "https://www.youtube.com/embed/" + videoId + "?autoplay=1&autohide=1";
-            if ($(this).data('params')) iframe_url += '&' + $(this).data('params');
-
-            // Высота и ширина iframe должны быть такими же, как и у родительского блока
-            var iframe = $('<iframe/>', {
-                'frameborder': '0',
-                'src': iframe_url,
-                'width': $(this).width(),
-                'height': $(this).innerHeight()
-            })
-
-            // Заменяем миниатюру HTML5 плеером с YouTube
-            $(this).closest('.video__wrapper').append(iframe);
-
-        });
-    }
-
-});
+// $(function () {
+//     if ($(".js_youtube")) {
+//         $(".js_youtube").each(function () {
+//             // Зная идентификатор видео на YouTube, легко можно найти его миниатюру
+//             $(this).css('background-image', 'url(http://i.ytimg.com/vi/' + this.id + '/sddefault.jpg)');
+//
+//             // Добавляем иконку Play поверх миниатюры, чтобы было похоже на видеоплеер
+//             $(this).append($('<img src="img/play.svg" alt="Play" class="video__play">'));
+//
+//         });
+//
+//         $('.video__play, .video__prev').on('click', function () {
+//             // создаем iframe со включенной опцией autoplay
+//             var videoId = $(this).closest('.js_youtube').attr('id');
+//             var iframe_url = "https://www.youtube.com/embed/" + videoId + "?autoplay=1&autohide=1";
+//             if ($(this).data('params')) iframe_url += '&' + $(this).data('params');
+//
+//             // Высота и ширина iframe должны быть такими же, как и у родительского блока
+//             var iframe = $('<iframe/>', {
+//                 'frameborder': '0',
+//                 'src': iframe_url,
+//                 'width': $(this).width(),
+//                 'height': $(this).innerHeight()
+//             })
+//
+//             // Заменяем миниатюру HTML5 плеером с YouTube
+//             $(this).closest('.video__wrapper').append(iframe);
+//
+//         });
+//     }
+//
+// });
 
 
 // Деление чисел на разряды Например из строки 10000 получаем 10 000
@@ -228,7 +244,7 @@ $(function () {
 
 // Простая проверка форм на заполненность и отправка аяксом
 function formSubmit() {
-    $("[type=submit]").on('click', function (e){
+    $("[type=submit]").on('click touchend', function (e){
         e.preventDefault();
         $('#check').val('antispam');
         var form = $(this).closest('.form');
